@@ -45,3 +45,8 @@
         )
     }
 }
+
+#define window_time_is(frame) {
+    // Returns if the current window_timer matches the frame AND the attack is not in hitpause
+    return window_timer == frame and !hitpause
+}
