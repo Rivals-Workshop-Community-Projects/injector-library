@@ -22,6 +22,7 @@
     if "_last_export_string_frame" in self && get_gameplay_time() - _last_export_string_frame <= 60*5 {
         print("SAFETY: Not running export string")
         should_run = false;
+    }
     
     if should_run {
         _last_export_string_frame = get_gameplay_time()
