@@ -1,3 +1,5 @@
+// These defines are for evaluation. They are expected to change dramatically before stabilizing.
+
 #define get_attacked_data
 /// get_attacked_data(should_launch = true, damage = 50, knockback_adj = 1, should_hitstop = true, owner_can_hit = true, teammates_can_hit = true, enemies_can_hit = true, ?filter_func = undefined)
 var should_launch = argument_count > 0 ? argument[0] : true;
@@ -161,3 +163,35 @@ var filter_func = argument_count > 7 ? argument[7] : undefined;
 			launch_hsp: attack_launch_hsp, launch_vsp: attack_launch_vsp
 		});
 	}
+
+
+#define lib_physics() {
+    // This is especially proof of concept, as I look for optimal usability.
+    if(free) {
+        if(abs(hsp) < air_friction) hsp = 0;
+    else hsp -= sign(hsp) * air_friction;
+    vsp += fall_accel;
+    if(vsp > terminal_vel) vsp = terminal_vel;
+        var par_block = asset_get("par_block"), par_jumpthrough = asset_get("par_jumpthrough");
+        if(!place_meeting(x, y, par_block)) { //don't try and bounce off things if we're clipped into a solid
+            var bounce_plat = (vsp > 0 && !place_meeting(x, y, par_jumpthrough) && place_meeting(x, y + vsp, par_jumpthrough));
+            var bounced = false;
+            if(bounce_plat || place_meeting(x, y + vsp, par_block)) {
+                vsp *= -1 * elasticity;
+                var bounced = true;
+            }
+            
+            if(place_meeting(x + hsp, y + vsp, par_block)) {
+                hsp *= -1 * elasticity;
+                var bounced = true;
+            }
+            if bounced {
+                // On bounce code
+            }
+        }
+    }
+    else {
+    if(abs(hsp) < ground_friction) hsp = 0;
+    else hsp -= sign(hsp) * ground_friction;
+    }
+}
