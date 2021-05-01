@@ -1,7 +1,10 @@
 #define lib_draw_sprite {   
-    // sprite, subimg, x, y, ?{?rot:0, ?col:c_white, ?alpha:1}
-    // Runs draw_sprite_ext with named, optional parameters.
+    // sprite, subimg, x, y, ?{rot=0, col=c_white, alpha=1}
     var sprite = argument[0]
+    if is_string(sprite) {
+        sprite = sprite_get(sprite)
+    }
+
     var subimg = argument[1]
     var x = argument[2]
     var y = argument[3]
