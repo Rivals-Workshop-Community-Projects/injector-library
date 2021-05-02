@@ -64,6 +64,8 @@ var filter_func = argument_count > 7 ? argument[7] : undefined;
 		//Cancel if we're using a filter function and it says so
 		if(use_filter_func && !script_execute(filter_func_index, other, id)) continue;
 		
+		
+		
 		//Remember this hitbox if it can hit the article
 		if(place_meeting(x + hsp - other.hsp, y + vsp - other.vsp, other)) {
 			found_hitbox = id;
@@ -87,7 +89,7 @@ var filter_func = argument_count > 7 ? argument[7] : undefined;
 		if(found_hitbox.effect == 9)
 			var attack_magnitude = 0;
 		else
-			var attack_magnitude = knockback_adj * (found_hitbox.kb_value + (found_hitbox.kb_scale * damage * 0.06));
+			var attack_magnitude = knockback_adj * (found_hitbox.kb_value + (found_hitbox.kb_scale * article_damage * 0.06));
 		
 		if("HG_MUNO_OBJECT_LAUNCH_ANGLE" in found_hitbox.player_id) {
 			//If the attack's owner is a MunoPhone character, then respect their Muno Object Launch Angle hitbox grid index
@@ -136,7 +138,7 @@ var filter_func = argument_count > 7 ? argument[7] : undefined;
 		if(found_hitbox.effect == 9)
 			var attack_hitstun = 0;
 		else
-			var attack_hitstun = (found_hitbox.hitstun_factor == 0?1:found_hitbox.hitstun_factor) * (found_hitbox.kb_value * 4 * ((knockback_adj - 1) * 0.6 + 1) + damage * 0.12 * found_hitbox.kb_scale * 4 * 0.65 * knockback_adj);
+			var attack_hitstun = (found_hitbox.hitstun_factor == 0?1:found_hitbox.hitstun_factor) * (found_hitbox.kb_value * 4 * ((knockback_adj - 1) * 0.6 + 1) + article_damage * 0.12 * found_hitbox.kb_scale * 4 * 0.65 * knockback_adj);
 		
 		//Hit reactions
 		if(found_hitbox.type == 1) {
