@@ -49,3 +49,8 @@
     // Returns if the current window_timer matches the frame AND the attack is not in hitpause
     return window_timer == frame and !hitpause
 }
+
+#define window_time_is_div(modulo) {
+    // Returns if the current window_timer matches the frame AND the attack is not in hitpause
+    return window_timer % modulo == 0 and !hitpause
+}
