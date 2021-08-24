@@ -1,3 +1,5 @@
+// Random functions that you don't need to manually index, can provide any number of random values per frame (rather than 24 or 200) yet are still desync safe.
+
 #define random()
     //Gives a random float between 0 and 1.
 	var seed = _get_seed()
